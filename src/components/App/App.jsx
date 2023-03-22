@@ -21,8 +21,6 @@ import {
   SectionTitle,
 } from './App.styled';
 
-import { getContacts } from 'services/api';
-
 function App() {
   const contactsItems = useSelector(selectContactsItems);
   const isLoading = useSelector(selectIsLoading);
@@ -30,13 +28,15 @@ function App() {
 
   const dispatch = useDispatch();
 
-  getContacts();
-
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
   useEffect(() => {
+    if (error === 'ERR_BAD_REQUEST') {
+      toast.error('There are some problems! Try again later.');
+      return;
+    }
     if (error) {
       toast.error(error);
     }

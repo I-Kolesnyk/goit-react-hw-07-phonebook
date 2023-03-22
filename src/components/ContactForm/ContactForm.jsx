@@ -74,8 +74,7 @@ function ContactForm() {
       return toast.info(`${data.name} is already in contacts!`);
     }
 
-    dispatch(saveContact(data));
-    toast.info('New contact has been added to your Phonebook');
+    dispatch(saveContact(data));    
   };
 
   return (
