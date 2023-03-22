@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactsItems } from 'redux/contactsSlice';
-import { addContact } from 'redux/contactsSlice';
+import { selectContactsItems } from 'redux/contacts/selectors';
+import { saveContact } from 'redux/contacts/operations';
 
 import {
   StyledLabel,
@@ -43,7 +43,7 @@ const schema = yup.object().shape({
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const contactsItems = useSelector(getContactsItems);
+  const contactsItems = useSelector(selectContactsItems);
   const {
     register,
     handleSubmit,
@@ -74,8 +74,8 @@ function ContactForm() {
       return toast.info(`${data.name} is already in contacts!`);
     }
 
-    dispatch(addContact(data));
-    toast.info('New contact has been added to your phonebook');
+    dispatch(saveContact(data));
+    toast.info('New contact has been added to your Phonebook');
   };
 
   return (

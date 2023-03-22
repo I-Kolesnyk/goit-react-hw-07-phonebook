@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, getFilterValue } from 'redux/filterSlice';
+import { setFilter } from 'redux/filter/filterSlice';
+import { getFilterValue } from 'redux/filter/selectors';
 import { StyledLabel, StyledInput } from './Filter.styled';
 
 function Filter() {
@@ -10,7 +11,7 @@ function Filter() {
       Find contacts by name
       <StyledInput
         name="filter"
-        type="text"       
+        type="text"
         onChange={event => dispatch(setFilter(event.currentTarget.value))}
         value={filterValue}
       />
